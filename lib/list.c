@@ -103,9 +103,8 @@ void slist_free(slistptr pl)
 ==============================================================================*/
 genptr slist_top(slistptr pl)
 {
-        assert(pl);
-        if(pl->head) 
-                return pl->head->data;
+        assert(pl && pl->head);
+        return pl->head->data;
 }
 void slist_pop(slistptr pl)
 {

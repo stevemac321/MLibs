@@ -105,9 +105,8 @@ void stack_push(stackptr ps, const genptr data)
 ==============================================================================*/
 genptr stack_top(const stackptr ps)
 {
-         assert(ps);
-        if(ps->head) 
-                return ps->head->data;
+         assert(ps && ps->head);
+         return ps->head->data;
 }
 void stack_pop(stackptr ps)
 {
