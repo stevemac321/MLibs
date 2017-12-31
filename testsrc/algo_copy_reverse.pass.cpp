@@ -5,6 +5,7 @@
 ==============================================================================*/
 #include "precompile.hpp"
 #include "test_support.h"
+
 class Foo
 {
       public:
@@ -105,6 +106,8 @@ void acrp_test7()
 			55);
 	vector<int> compare{0, 55, 2, 55, 4, 55, 6, 55, 8, 55};
 	VERIFY(v == compare);
+    vector<int> test;
+    
 }
 /// std::unique
 ///
