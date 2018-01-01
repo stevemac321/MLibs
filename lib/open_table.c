@@ -23,8 +23,6 @@ struct open_table {
         void(*alloc_insert)(tableptr, size_t, genptr);
 	genptr* table;
 };
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wformat="
 
 /**=============================================================================
  Function:   open_table_init
@@ -225,7 +223,7 @@ size_t inthash(const int* value)
 }
 void table_report(const tableptr table)
 {
-	printf("Table size: %d Element count: %d\n", table->table_size, 
+	printf("Table size: %zu Element count: %zu\n", table->table_size, 
 							table->count);
 }
 void table_int_alloc(tableptr table, size_t idx, genptr value)
@@ -242,4 +240,3 @@ void table_str_alloc(tableptr table, size_t idx, genptr value)
         table->table[idx] = Heap_Malloc(strlen(s));
 	strcpy(table->table[idx], s);
 }
-#pragma GCC diagnostic pop

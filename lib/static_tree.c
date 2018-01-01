@@ -308,8 +308,10 @@ nodeptr tree_inner_find(nodeptr p, const genptr k,
 		return p;
 
 	if (comp < 0)
-		tree_inner_find(p->left, k, cmp);
+        	p->left = tree_inner_find(p->left, k, cmp);
 	else
-		tree_inner_find(p->right, k, cmp);
+		p->right = tree_inner_find(p->right, k, cmp);
+
+        return p;
 }
 #pragma GCC diagnostic pop
