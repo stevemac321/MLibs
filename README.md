@@ -92,10 +92,15 @@ cd Debug
 This will start gdb in ncurses mode, then enter the following commands
 
 gdb> tar ext:4242 
+
 gdb> load 
+
 gdb> monitor semihosting enable
+
 gdb> b main
+
 gdb> b dummy
+
 gdb> c
 
 the debugger will break in main, now debug as usual.  
