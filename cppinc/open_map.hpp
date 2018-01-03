@@ -164,7 +164,7 @@ class open_map
 	}
 	void stats()
 	{
-		printf("size %d: max_size: %d\n", _size, _max_size);
+		printf("size %zu: max_size: %zu\n", _size, _max_size);
 	}
 	void resize()
 	{

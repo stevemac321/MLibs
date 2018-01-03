@@ -47,7 +47,7 @@ template <typename T, class Allocator = stevemac::allocator<T>> class vector
 	/// Default constructed vector: zero size, zero capacity, invalid
 	/// iterators.
 	explicit vector(const allocator_type &a = allocator_type())
-	    : _allocator(a), _size(0), _capacity(0)
+	    : _size(0), _capacity(0), _allocator(a)
 	{
 		_begin = _end = nullptr;
 	}
@@ -84,7 +84,7 @@ template <typename T, class Allocator = stevemac::allocator<T>> class vector
 		  typename = std::_RequireInputIter<InputIterator>>
 	vector(InputIterator first, InputIterator last,
 	       const allocator_type &a = allocator_type())
-	    : _allocator(a), _size(last - first), _capacity(_size)
+	    : _size(last - first), _capacity(_size), _allocator(a)
 	{
 
 		assign(first, last);
@@ -93,7 +93,7 @@ template <typename T, class Allocator = stevemac::allocator<T>> class vector
 	template <typename InputIterator>
 	vector(InputIterator first, InputIterator last,
 	       const allocator_type &a = allocator_type())
-	    : _allocator(a), _size(last - first), _capacity(_size)
+	    : _size(last - first), _capacity(_size), _allocator(a)
 	{
 
 		assign(first, last);
@@ -102,7 +102,7 @@ template <typename T, class Allocator = stevemac::allocator<T>> class vector
 	/// see above ctor
 	vector(iterator first, iterator last,
 	       const allocator_type &a = allocator_type())
-	    : _allocator(a), _size(last - first), _capacity(_size)
+	    : _size(last - first), _capacity(_size), _allocator(a)
 	{
 
 		assign(first, last);
@@ -134,7 +134,7 @@ template <typename T, class Allocator = stevemac::allocator<T>> class vector
 
 	vector(std::initializer_list<T> il,
 	       const allocator_type &a = allocator_type())
-	    : _allocator(a), _size(il.size()), _capacity(_size)
+	    : _size(il.size()), _capacity(_size), _allocator(a)
 	{
 		assign(il);
 	}
@@ -945,9 +945,9 @@ template <typename T, class Allocator = stevemac::allocator<T>> class vector
 	/// vector private data members
 	//===----------------------------------------------------------------------===//
       private:
-	Allocator _allocator;
 	size_type _size = 0;
 	size_type _capacity = 0;
+	Allocator _allocator;
 	pointer _begin = nullptr;
 	pointer _end = nullptr;
 	size_type _size_n_alloc = 0;
