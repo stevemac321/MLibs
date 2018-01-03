@@ -19,7 +19,6 @@
 #endif
 // test data
 // array interface tests
-static int a[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
 static int arr[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3};
 static int grid[3][3] = {{44, 77, 11}, {2, 100, 77}, {0, 33, 9}};
 static const char *strs[] = {"zero", "one", "two", "three", "four"};
@@ -136,9 +135,9 @@ void deduce_type_test()
 void merge_test()
 {
 	TC_BEGIN(__func__);
-	int src1[] = {99, 88, 77, 66, 55, 44, 33, 22, 11, 0};
-	int src2[] = {91, 81, 71, 61, 51, 41, 31, 21, 11, 1};
-	int dest[20];
+	int src1[11] = {99, 88, 77, 66, 55, 44, 33, 22, 11, 0};
+	int src2[11] = {91, 81, 71, 61, 51, 41, 31, 21, 11, 1};
+	int dest[30];
 	deduce_sort(src1, 10);
 	deduce_sort(src2, 10);
 	print_int_array(src1, 10);
@@ -150,8 +149,8 @@ void merge_test()
 void swap_ranges_test()
 {
 	TC_BEGIN(__func__);
-	int src1[] = {99, 88, 77, 66, 55, 44, 33, 22, 11, 0};
-	int src2[] = {91, 81, 71, 61, 51, 41, 31, 21, 11, 1};
+	int src1[11] = {99, 88, 77, 66, 55, 44, 33, 22, 11, 0};
+	int src2[11] = {91, 81, 71, 61, 51, 41, 31, 21, 11, 1};
 	print_int_array(src1, _countof(src1));
 	print_int_array(src2, _countof(src2));
 	swap_ranges(src1, src2, 5, sizeof(int), int_swap);
