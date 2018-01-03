@@ -308,9 +308,9 @@ nodeptr tree_inner_find(nodeptr p, const genptr k,
 		return p;
 
 	if (comp < 0)
-        	p->left = tree_inner_find(p->left, k, cmp);
+        	tree_inner_find(p->left, k, cmp);
 	else
-		p->right = tree_inner_find(p->right, k, cmp);
+	        tree_inner_find(p->right, k, cmp);
 
         return p;
 }
