@@ -16,7 +16,11 @@ Shared with desktop builds Automation Minimal Projects, No IDE Linux, Bash, GNU 
 
 To use:
 
-Get arm cross tools https://launchpad.net/gcc-arm-embedded get texane/stlink https://github.com/texane/stlink
+Get arm cross tools https://developer.arm.com/open-source/gnu-toolchain/gnu-rm: Copy to your $(HOME) directory
+
+Get texane/stlink https://github.com/texane/stlink  (follow the compiling manual:
+
+https://github.com/texane/stlink/blob/master/doc/compiling.md ).
 
 Extract STLibs.tar INTO YOUR HOME FOLDER
 
@@ -29,25 +33,30 @@ If you are on FreeBSD, change make to gmake in the bfy.py
 
 The directory structure should look like this:
 
-gcc-arm-embedded-...
+$(HOME)/gcc-arm-embedded-...
 
-STLibs
+$(HOME)/STLibs
 
-MLibs
+$(HOME)/MLibs
 
----cinc
+$(HOME)MLIBS/cinc
 
----cppinc
+$(HOME)MLIBS/cppinc
 
----lib
+$(HOME)MLIBS/lib
 
----embtests
+$(HOME)MLIBS/embtests
 
-the suite was tested with:
+NOTE: x86tests are NOT part of the suite.  They for testing using more analysis tools on x64 or x86.
+
+$(HOME)MLIBS/x86tests
+
+
+NOTE: the suite was tested with:
 
 gcc-arm-none-eabi-5_4-2016q3
 
-And this is hardcoded in the bfy.py and the st32.mak files
+NOTE: And this is hardcoded in the bfy.py and the st32.mak files
 
 If you download a different build, you can get away with simply 
 
