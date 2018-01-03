@@ -66,6 +66,12 @@ rather than  edit the .mak files.
 
 HOW TO clean, build, and run the entire suite:
 
+You will need to give ./bfy.py executable permissions:  chmod +x bfy.py
+
+If you are running on FreeBSD, you can build and clean as normal user,
+
+but you will need to run as superuser (root) to debug or flashrun.
+
 From the MLibs directory:
 
 ./bfy embtests clean build flashrun
