@@ -1,8 +1,8 @@
 BSP_ROOT ?= $(HOME)/STLibs/EmbeddedBSPs/arm-eabi
 EFP_BASE ?= $(HOME)/STLibs/EmbeddedEFPs
 TOOLCHAIN_ROOT ?= $(HOME)/gcc-arm-none-eabi-5_4-2016q3
-LIBSRC=$(HOME)/workspace/RTOS/lib
-TESTSRC=$(HOME)/workspace/RTOS/testsrc
+LIBSRC=$(HOME)/MLibs/lib
+TESTSRC=$(HOME)/MLibs/testsrc
 
 
 #Embedded toolchain
