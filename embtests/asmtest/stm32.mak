@@ -1,11 +1,10 @@
-LOCALAPPDATA=/home/comet
-BSP_ROOT ?= $(LOCALAPPDATA)/STLibs/EmbeddedBSPs/arm-eabi
-EFP_BASE ?= $(LOCALAPPDATA)/STLibs/EmbeddedEFPs
-TESTFW_BASE ?= $(LOCALAPPDATA)/STLibs/TestFrameworks
+BSP_ROOT ?= $(HOME)/STLibs/EmbeddedBSPs/arm-eabi
+EFP_BASE ?= $(HOME)/STLibs/EmbeddedEFPs
+TESTFW_BASE ?= $(HOME)/STLibs/TestFrameworks
 TOOLCHAIN_ROOT ?= /home/comet/gcc-arm-none-eabi-5_4-2016q3
-LIBSRC=$(LOCALAPPDATA)/workspace/RTOS/lib
-ASMSRC=$(LOCALAPPDATA)/workspace/RTOS/lib/asm
-LIBINC=$(LOCALAPPDATA)/workspace/RTOS/cinc
+LIBSRC=$(HOME)/MLibs/lib
+ASMSRC=$(HOME)/MLibs/lib/asm
+LIBINC=$(HOME)/MLibs/cinc
 #Embedded toolchain
 CC := $(TOOLCHAIN_ROOT)/bin/arm-none-eabi-gcc 
 CXX := $(TOOLCHAIN_ROOT)/bin/arm-none-eabi-gcc 
@@ -25,7 +24,6 @@ LINUX_PACKAGES +=
 CFLAGS += -ggdb -DSTM32F401xx
 CXXFLAGS += 
 ASFLAGS += -mfpu=fpv4-sp-d16 -ggdb -DSTM32F401xx
-#LDFLAGS +=  -specs=nosys.specs -specs=nano.specs -u _printf_float -specs=rdimon.specs -lc -lrdimon
 LDFLAGS += -u _printf_float -specs=rdimon.specs 
 COMMONFLAGS += -mcpu=cortex-m4 -mthumb -mfloat-abi=soft
 LINKER_SCRIPT := $(BSP_ROOT)/STM32F4xxxx/LinkerScripts/STM32F401RE_flash.lds
