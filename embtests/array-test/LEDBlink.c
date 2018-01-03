@@ -20,7 +20,6 @@
 // test data
 // array interface tests
 static int a[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
-static int arr[] = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3};
 static int grid[3][3] = {{44, 77, 11}, {2, 100, 77}, {0, 33, 9}};
 static const char *strs[] = {"zero", "one", "two", "three", "four"};
 static student recs[] = {{"Joe", 2.0},   {"Mary", 4.0},  {"Larry", 3.5},
