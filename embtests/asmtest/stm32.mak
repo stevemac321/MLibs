@@ -1,7 +1,6 @@
 BSP_ROOT ?= $(HOME)/STLibs/EmbeddedBSPs/arm-eabi
 EFP_BASE ?= $(HOME)/STLibs/EmbeddedEFPs
-TESTFW_BASE ?= $(HOME)/STLibs/TestFrameworks
-TOOLCHAIN_ROOT ?= /home/comet/gcc-arm-none-eabi-5_4-2016q3
+TOOLCHAIN_ROOT ?= $(HOME)/gcc-arm-none-eabi-5_4-2016q3
 LIBSRC=$(HOME)/MLibs/lib
 ASMSRC=$(HOME)/MLibs/lib/asm
 LIBINC=$(HOME)/MLibs/cinc
