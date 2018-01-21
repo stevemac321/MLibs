@@ -15,7 +15,7 @@ struct listinl {
 	struct nodeinl *(*ctor)(void *);
 	void (*dtor)(struct nodeinl *);
 };
-void listinl_init(struct listinl *pl, struct nodeinl *(*ctor)(void *),
+static inline void listinl_init(struct listinl *pl, struct nodeinl *(*ctor)(void *),
 		  void (*dtor)(struct nodeinl *))
 {
 	assert(pl && ctor && dtor);
@@ -23,14 +23,14 @@ void listinl_init(struct listinl *pl, struct nodeinl *(*ctor)(void *),
 	pl->ctor = ctor;
 	pl->dtor = dtor;
 }
-void listinl_addhead(struct listinl *pl, void *data)
+static inline void listinl_addhead(struct listinl *pl, void *data)
 {
 	assert(pl && data);
 	struct nodeinl *pnew = pl->ctor(data);
 	pnew->next = pl->head;
 	pl->head = pnew;
 }
-void listinl_destroy(struct listinl *pl)
+static inline void listinl_destroy(struct listinl *pl)
 {
 	assert(pl);
 	struct nodeinl *p = pl->head;
