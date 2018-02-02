@@ -48,6 +48,7 @@ asm_int_notless:
 /*----------------------------------------------------------------------------*/  
 gen_sort:
        	stmfd   sp!, {r4-r11}   /* we will need more registers for the loops */
+        mov     r11, r2                 /* save the predicate */
         mov     r7, #0  /* outer loop */
         mov     r8, r1  /* inner loop copy of outer loop or key */
         mov     r9, #0  /* inner loop acting as key - 1 */
@@ -68,7 +69,7 @@ while_loop:
         ldr     r4, [r0, r8, lsl #2]  /* r4:  array[key] */
         ldr     r5, [r0, r9, lsl #2]  /* swap temp1 */
         // compare needs to save context
-        mov     r11, r2                 /* save the predicate before push*/
+       // mov     r11, r2                 /* save the predicate before push*/
         stmfd	sp!, {r0-r3, lr}
         mov	r0, r4
         mov	r1, r5
