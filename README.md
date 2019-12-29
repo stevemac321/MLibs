@@ -36,100 +36,61 @@ If you are on FreeBSD, change make to gmake in the bfy.py
 The directory structure should look like this:
 
 $(HOME)/gcc-arm-embedded-...
-
 $(HOME)/STLibs
-
 $(HOME)/MLibs
-
 $(HOME)MLIBS/cinc
-
 $(HOME)MLIBS/cppinc
-
 $(HOME)MLIBS/lib
-
 $(HOME)MLIBS/embtests
 
 NOTE: x86tests are NOT part of the suite.  They for testing using more analysis tools on x64 or x86.
-
 $(HOME)MLIBS/x86tests
 
-
 NOTE: the suite was tested with:
-
 gcc-arm-none-eabi-5_4-2016q3
 
 NOTE: And this is hardcoded in the bfy.py and the st32.mak files
-
 If you download a different build, you can get away with simply 
-
 renaming the directory name to gcc-arm-none-eabi-5_4-2016q3
-
 rather than  edit the .mak files.
 
 HOW TO clean, build, and run the entire suite:
 
 You will need to give ./bfy.py executable permissions:  chmod +x bfy.py
 
-If you are running on FreeBSD, you can build and clean as normal user,
-
-but you will need to run as superuser (root) to debug or flashrun.
+(If you are running on FreeBSD, you can build and clean as normal user,
+but you will need to run as superuser (root) to debug or flashrun.)
 
 From the MLibs directory:
-
 ./bfy embtests clean build flashrun
-
 You can just clean, or just build, or just flashrun by just passing that arg.
-
 Do debug a single test, navigate to that test, e.g. embtests/c-algorithms
 
 To clean:
-
 make clean
 
 To build:
-
 make
 
 To Debug:
-
 -start a second console if you are running a GUI Desktop, if console, use screen or tmux
 
 -In one console:
-
 st-util
-
 (This will deploy the remote debugging server and will listen for the host gdb session)
 
 -In the second console
-
 cd Debug
-
 <path to gcc-arm-none-eabi-5_4-2016q3>/bin/arm-none-eabi-gdb -tui test.elf
-
 This will start gdb in ncurses mode, then enter the following commands
 
 gdb> tar ext:4242 
-
 gdb> load 
-
 gdb> monitor semihosting enable
-
 gdb> b main
-
 gdb> b dummy
-
 gdb> c
 
 the debugger will break in main, now debug as usual.  
-
 These programs end by running a loop, so setting a breakpoint
-
 at dummy() so you can "kill", then "quit"
-
-
-
-
-
-
-
-
