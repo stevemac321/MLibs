@@ -22,6 +22,8 @@ Get texane/stlink https://github.com/texane/stlink  (follow the compiling manual
 
 https://github.com/texane/stlink/blob/master/doc/compiling.md ).
 
+Get libusb as follows: sudo apt-get install libusb-1.0-0-dev
+
 Extract STLibs.tar INTO YOUR HOME FOLDER
 
 clone into your $(HOME)_folder:
