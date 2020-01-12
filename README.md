@@ -27,32 +27,30 @@ Get libusb as follows: sudo apt-get install libusb-1.0-0-dev
 Extract STLibs.tar INTO YOUR HOME FOLDER
 
 clone into your $(HOME)_folder:
-git clone https://github.com/stevemac321/MLibs.git
+git clone https://github.com/stevemac321MLibs.git
 
-Extract STLibs.tar into your $(HOME) folder
+Extract STLibs.tar into your the MLibs folder.
 
 If you are on FreeBSD, change make to gmake in the bfy.py
 
 The directory structure should look like this:
 
-$(HOME)/gcc-arm-embedded-...
-$(HOME)/STLibs
+$(HOME)/MLIBs/gcc-arm-embedded-...
+$(HOME)/MLIBs/STLibs
 $(HOME)/MLibs
-$(HOME)MLIBS/cinc
-$(HOME)MLIBS/cppinc
-$(HOME)MLIBS/lib
-$(HOME)MLIBS/embtests
+$(HOME)/MLIBS/cinc
+$(HOME)/MLIBS/cppinc
+$(HOME)/MLIBS/lib
+$(HOME)/MLIBS/embtests
 
 NOTE: x86tests are NOT part of the suite.  They for testing using more analysis tools on x64 or x86.
 $(HOME)MLIBS/x86tests
 
-NOTE: the suite was tested with:
-gcc-arm-none-eabi-5_4-2016q3
-
-NOTE: And this is hardcoded in the bfy.py and the st32.mak files
-If you download a different build, you can get away with simply 
-renaming the directory name to gcc-arm-none-eabi-5_4-2016q3
-rather than  edit the .mak files.
+NOTE: the suite was orginally tested with:
+gcc-arm-none-eabi-5_4-2016q3 (but we are using version 9 these days).
+HOWEVER, rename this directory to gcc-arm.
+So that it matches the makefiles, plus it is a long name and a hassle when
+debugging.
 
 HOW TO clean, build, and run the entire suite:
 
@@ -81,7 +79,7 @@ st-util
 
 -In the second console
 cd Debug
-<path to gcc-arm-none-eabi-5_4-2016q3>/bin/arm-none-eabi-gdb -tui test.elf
+<path to gcc-arm/bin/arm-none-eabi-gdb -tui test.elf
 This will start gdb in ncurses mode, then enter the following commands
 
 gdb> tar ext:4242 

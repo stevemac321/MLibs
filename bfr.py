@@ -38,7 +38,7 @@ def flashrun(script):
 	flash2.wait()
 
 	stlink2 = subprocess.Popen(['st-util', '-m', '--listen_port=4242'])	
-	gdb2 = subprocess.Popen([os.environ['HOME'] + '/gcc-arm-none-eabi-5_4-2016q3/bin/arm-none-eabi-gdb', '--batch', '--command=' + script, elffile])
+	gdb2 = subprocess.Popen([os.environ['HOME'] + '/MLibs/gcc-arm/bin/arm-none-eabi-gdb', '--batch', '--command=' + script, elffile])
 	gdb2.wait()
 	stlink2.kill()
 	
