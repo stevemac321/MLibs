@@ -1,0 +1,28 @@
+tar ext:3333
+set confirm off
+monitor arm semihosting enable
+break dummy
+load
+step
+continue
+delete
+kill
+quit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
