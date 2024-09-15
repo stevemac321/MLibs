@@ -27,20 +27,34 @@ def flasherase():
 	flash = subprocess.Popen(['st-flash', 'erase'])
 	flash.wait()
 
-def flashrun(script):
-	
-	binfile = './test.bin'
-	elffile = './test.elf'
+def flashrun():
+    binfile = './test.bin'
+    elffile = './test.elf'
+    gdbscript = '/mnt/raiddrive/MLibs/gdbscript'  # Path to the gdbscript file
 
-	flash1 = subprocess.Popen(['st-flash', 'write', binfile, '0x08000000'])
-	flash1.wait()
-	flash2 = subprocess.Popen(['st-flash', 'reset'])
-	flash2.wait()
+    # Flash the binary to the device
+    flash1 = subprocess.Popen(['st-flash', 'write', binfile, '0x08000000'])
+    flash1.wait()
 
-	stlink2 = subprocess.Popen(['openocd', '-f',  'interface/stlink.cfg', '-f',  'target/stm32f4x.cfg'])	
-	gdb2 = subprocess.Popen(['gdb-multiarch', '--batch', '--command=' + script, elffile])
-	gdb2.wait()
-	stlink2.kill()
+    # Reset the device after flashing
+    flash2 = subprocess.Popen(['st-flash', 'reset'])
+    flash2.wait()
+
+    # Start openocd for the debug interface
+    stlink2 = subprocess.Popen(['openocd', '-f', 'interface/stlink.cfg', '-f', 'target/stm32f4x.cfg'])    
+
+    # Check if the gdbscript file exists
+    if not os.path.exists(gdbscript):
+        print(f"Error: GDB script '{gdbscript}' not found.")
+        return
+
+    # Run GDB with the provided script and ELF file
+    gdb2 = subprocess.Popen(['gdb-multiarch', '--batch', '--command=' + gdbscript, elffile])
+    gdb2.wait()
+
+    # Kill openocd once done
+    stlink2.kill()
+
 	
 def run():
 	proc = subprocess.Popen('./test')
@@ -58,7 +72,7 @@ def parseargs(root_dir, fullcur_dir, test_dir):
 			flasherase()
 		elif sys.argv[idx] == 'flashrun':
 			os.chdir(fullcur_dir + '/Debug')
-			flashrun(root_dir + '/gdbscript')
+			flashrun()
 			os.chdir(fullcur_dir)
 		elif sys.argv[idx] == 'run':
 			run()
