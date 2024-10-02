@@ -28,4 +28,3 @@ ASFLAGS += -mfpu=fpv4-sp-d16 -ggdb -DSTM32F401xx
 LDFLAGS += -u _printf_float -specs=rdimon.specs 
 COMMONFLAGS += -mcpu=cortex-m4 -mthumb -mfloat-abi=soft
 LINKER_SCRIPT := $(BSP_ROOT)/STM32F4xxxx/LinkerScripts/STM32F401RE_flash.lds
-

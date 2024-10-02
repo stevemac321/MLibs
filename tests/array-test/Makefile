@@ -29,7 +29,7 @@ error:
 	$(error Invalid configuration, please check your inputs)
 endif
 
-SOURCEFILES := $(BSP_ROOT)/STM32F4xxxx/StartupFiles/startup_stm32f401xe.c LEDBlink.c system_stm32f4xx.c $(LIBSRC)/precompile.c $(LIBSRC)/algo.c $(LIBSRC)/polyarray.c  $(LIBSRC)/heap.c $(LIBSRC)/array.c $(LIBSRC)/static_tree.c $(LIBSRC)/open_table.c $(LIBSRC)/stack.c $(LIBSRC)/list.c $(LIBSRC)/circ_list.c $(LIBSRC)/functor.c $(BSP_ROOT)/STM32F4xxxx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c $(BSP_ROOT)/STM32F4xxxx/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.c
+SOURCEFILES := $(BSP_ROOT)/STM32F4xxxx/StartupFiles/startup_stm32f401xe.c main.c system_stm32f4xx.c $(LIBSRC)/precompile.c $(LIBSRC)/algo.c $(LIBSRC)/polyarray.c  $(LIBSRC)/heap.c $(LIBSRC)/array.c  $(LIBSRC)/stack.c  $(LIBSRC)/functor.c 
 
 EXTERNAL_LIBS := 
 EXTERNAL_LIBS_COPIED := $(foreach lib, $(EXTERNAL_LIBS),$(BINARYDIR)/$(notdir $(lib)))

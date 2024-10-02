@@ -1,7 +1,7 @@
 #include "precompile.h"
+#include "harness.h"
 #include "algo.h"
 #include "functor.h"
-#include <stm32f4xx_usart.h>
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wincompatible-pointer-types"
@@ -56,12 +56,6 @@ void main(void)
     test_c();
     REPORT("emb asmtest");
     dummy();
-
-    while (1) {
-        Delay();
-       
-    }
-
 }
 
 void Delay()
@@ -155,10 +149,6 @@ void test_c()
 int gen_str_less(int_holding_const_char_pointer s1, 
                  int_holding_const_char_pointer s2)
 {
- /* Warning: diabolical code!!  Need to make sure that word size is same 
- as pointer size due toe vil storing of const char* cast into int for the 
- generic sorting predicate so that we can use the same signature for both
- word size and pointer size predicate arguments */
         VERIFY(sizeof(int) == sizeof(const char*));
         VERIFY(sizeof(int) == sizeof(int*));
         VERIFY(s1 && s2);
@@ -175,36 +165,4 @@ void print_array(pointer array, const size_t count)
         
         printf("\n");
 }
-void PrintByte(char c)
-{
-  USART_SendData(USART2, c);
-  while (USART_GetFlagStatus(USART2, USART_FLAG_TXE) == RESET)
-          ; /* do nothing until RESET state*/
-}
-
-size_t __write(int handle, const unsigned char* data, size_t byteCount)
-{
-    size_t nChars = 0;
-
-    // handle == -1 means "flush all streams". Not implemented here.
-    if (handle == -1 || byteCount == 0)
-        return 0;
-
-    // 1 - stdout; 2 - stderr. 
-    if (handle != 1 && handle != 2)
-        return -1;
-
-    while (byteCount-- > 0) {
-        char ch = (char)(*data);
-        PrintByte(ch);
-        if (ch == '\n') {
-            PrintByte('\r');
-        }
-       ++data;
-       ++nChars;
-    }
-    return nChars;
-
-} // __write
-
 #pragma GCC diagnostic push
