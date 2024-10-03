@@ -40,6 +40,31 @@
  *     enum insert_state open_table_insert(struct open_table *table, TYPE value);
  *     ```
  *
+ * ### `lookup_result open_table_lookup(struct open_table *table, TYPE value)`
+ *
+ * **Purpose**:  
+ * Searches for a specified value in the hash table and returns a `lookup_result` struct. This struct contains a boolean indicating if the value was found and the value itself if it exists.
+ *
+ * **Parameters**:
+ * - `table`: A pointer to the `open_table` structure.
+ * - `value`: The value to search for in the table.
+ *
+ * **Returns**:  
+ * A `lookup_result` struct with:
+ * - `found`: A boolean flag that is `true` if the value was found in the table, otherwise `false`.
+ * - `value`: The actual value from the table if `found` is `true`. If not found, `value` is undefined.
+ *
+ * **Example Usage**:
+ * ```
+ * lookup_result result = open_table_lookup(&table, search_value);
+ * if (result.found) {
+ *     printf("Value %.2f found in the table.\n", result.value);
+ * } else {
+ *     printf("Value %.2f not found in the table.\n", search_value);
+ * }
+ * ```
+ */
+
  * - **`open_table_cluster_report`**:
  *   - Reports on the clusters formed in the hash table, showing which slots are occupied.
  *   - Function Signature:

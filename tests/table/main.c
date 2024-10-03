@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <float.h>
 #include <time.h>
+#include <stdbool.h>
 #include "harness.h"
 
 #define BUFFER_SIZE 1028
@@ -20,7 +21,11 @@ struct open_table table;
 #define TYPE float  // Define TYPE as float, but can be changed to any type
 
 enum insert_state { INSERTED, TABLEFULL, EXISTS };
-
+// Structure to represent the lookup result
+typedef struct {
+    bool found;
+    TYPE value;
+} lookup_result;
 
 /**=============================================================================
  Interface:   open_table
@@ -42,6 +47,8 @@ void open_table_init(struct open_table *table, TYPE *buffer, const size_t size,
 			size_t (*h1)(TYPE ),	size_t (*h2)(TYPE ));
 
 enum insert_state open_table_insert(struct open_table *table, TYPE value);
+lookup_result open_table_lookup(struct open_table *table, TYPE value);
+
 size_t quadratic_probe(size_t hash, int i, size_t table_size);
 size_t inthash(TYPE value);
 size_t secondary_hash(TYPE value);
@@ -61,13 +68,30 @@ int main()
     srand((unsigned int)time(NULL));
     open_table_init(&table, buffer, BUFFER_SIZE, inthash, secondary_hash);
     
-    TC_BEGIN("open table test");
+    TC_BEGIN("open table test insert");
 	for(size_t i=0; i < BUFFER_SIZE / 2; i++) {
         float f = randf(MIN_FLOAT, MAX_FLOAT);
         open_table_insert(&table, f);
     }
     open_table_cluster_report(&table);
     analyze_clusters(&table);
+
+
+    TC_BEGIN("open table test lookup positive case");
+    // Test 1: Positive lookup test - Check for a value that should exist in the table
+    float test_value = buffer[10];  // Select a value from the initial buffer for positive test
+    lookup_result result = open_table_lookup(&table, test_value);
+    VERIFY(result.found == true);
+    printf("Positive Lookup Test: Looking for value %.2f -> Found: %s\n", test_value, result.found ? "Yes" : "No");
+    
+
+    TC_BEGIN("open table test lookup negative case");
+    // Test 2: Negative lookup test - Check for a value that is not in the table
+    float non_existent_value = 9999.0f;  // Use a value that was not inserted
+    lookup_result result_neg = open_table_lookup(&table, non_existent_value);
+    VERIFY(result_neg.found == false);
+    printf("Negative Lookup Test: Looking for value %.2f -> Found: %s\n", non_existent_value, result_neg.found ? "Yes" : "No");
+
     REPORT("open table end");
     dummy();
 
@@ -163,7 +187,36 @@ enum insert_state open_table_insert(struct open_table *table, const TYPE value) 
     // Table is full, cannot insert the value.
     return TABLEFULL;
 }
+/**
+ * @brief Look up an element in the open address hash table.
+ * 
+ * @param table The open address hash table.
+ * @param value The value to look for.
+ * @return lookup_result Struct containing the result of the lookup.
+ */
+lookup_result open_table_lookup(struct open_table *table, TYPE value) {
+    assert(table);
 
+    // Iterate through the table using quadratic probing.
+    for (int i = 0; i < table->table_size; i++) {
+        size_t primary_hash = table->h1(value);  // Primary hash function.
+        size_t idx = quadratic_probe(primary_hash, i, table->table_size);
+
+        // Check if the slot is occupied using the bitvector.
+        if (is_slot_occupied(table->bitvector, idx)) {
+            // If the slot is occupied, check if the value at this slot matches the searched value.
+            if (table->table[idx] == value) {
+                return (lookup_result){.found = true, .value = table->table[idx]};
+            }
+        } else {
+            // If an empty slot is encountered, the value is not in the table.
+            return (lookup_result){.found = false, .value = 0.0f};  // Assuming 0.0f is a good default value for not found.
+        }
+    }
+
+    // Table is full or value not found.
+    return (lookup_result){.found = false, .value = 0.0f};
+}
 size_t quadratic_probe(size_t hash, int i, size_t table_size) {
     return (hash + i * i) % table_size;
 }
