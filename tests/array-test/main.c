@@ -39,6 +39,7 @@ void Delay()
 void dummy();
 int main()
 {
+	PROJECT_BANNER("ARRAY TEST, Dynamic Array and Algorithms");
 	Heap_Init();
 	array_test();
 	poly_test();

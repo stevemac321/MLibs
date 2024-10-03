@@ -30,6 +30,7 @@ void dummy();
 
 int main()
 {
+    PROJECT_BANNER("Priority Queue, Heap Sort Algorithms, A Fixed, Attachable Priority Queue for Embedded Enviroments");
     TC_BEGIN("priority_queue test");
 	priority_queue_from_array(&pq, output_buffer, BUFFER_SIZE );
 	priority_queue_build_max_heap(&pq);

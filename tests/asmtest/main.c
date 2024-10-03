@@ -52,7 +52,7 @@ void Delay();
 
 void main(void)
 {
-
+    PROJECT_BANNER("ARM ASSEMBLY TEST, Assembly Language Algorithms");
     test_c();
     REPORT("emb asmtest");
     dummy();

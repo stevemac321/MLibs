@@ -56,6 +56,7 @@ float randf(float min, float max);
 
 int main()
 {
+    PROJECT_BANNER("OPEN ADDRESS HASHTABLE, VALUE SEMATICS, A Fixed, Attachable Array and Bitvector for Embedded Enviroments");
 
     srand((unsigned int)time(NULL));
     open_table_init(&table, buffer, BUFFER_SIZE, inthash, secondary_hash);

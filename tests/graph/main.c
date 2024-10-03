@@ -58,7 +58,8 @@ void dummy();
 
 int main()
 {
-	test_graph();
+    PROJECT_BANNER("GRAPH Algorithms, A Fixed, Attachable Array for Embedded Enviroments");
+    test_graph();
     dummy();
 }
 bool create_graph(struct Graph *g, struct Vertex *buffer, const int numVerts, const int cap) {

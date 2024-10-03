@@ -1,6 +1,5 @@
 /* array size macros */
 
-
 #include <stdio.h>
 #include <assert.h>
 #include <time.h>
@@ -17,12 +16,26 @@ typedef struct {
 TestStats stats = {0, 0, 0};
 
 /* TEST HARNESS */
+
+// Project banner to print a visually distinct header for the project
+#define PROJECT_BANNER(project) \
+    do { \
+        printf("\n"); \
+        printf("*******************************************************************************************************************\n"); \
+        printf("**                                                                                                               **\n"); \
+        printf("** %-73s **\n", project); \
+        printf("**                                                                                                               **\n"); \
+        printf("*****************************************************************************************************************\n\n"); \
+    } while (0)
+
+// Test case begin banner
 #define TC_BEGIN(func) \
     do { \
         printf("-------------------- TESTCASE BEGIN: %s ---------------------\n", func); \
         stats.tcs++; \
     } while (0)
 
+// Verify a test condition
 #define VERIFY(x) \
     do { \
         if (x) { \
@@ -34,18 +47,21 @@ TestStats stats = {0, 0, 0};
         assert(x); \
     } while (0)
 
+// Mark a test as passed
 #define PASSED(func, line) \
     do { \
         printf("---- PASSED: %s at Line: %d ----\n", func, line); \
         stats.passed++; \
     } while (0)
 
+// Mark a test as failed
 #define FAILED(func, line) \
     do { \
         printf("---- FAILED: %s at Line: %d ----\n", func, line); \
         stats.failed++; \
     } while (0)
 
+// Report test statistics
 #define REPORT(msg) \
     do { \
         time_t now = time(NULL); \
@@ -55,6 +71,7 @@ TestStats stats = {0, 0, 0};
                msg, stats.tcs, stats.passed, stats.failed, timestamp); \
     } while (0)
 
+// Reset test statistics
 #define RESET() \
     do { \
         stats.passed = 0; \
