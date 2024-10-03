@@ -1,5 +1,5 @@
 /*==============================================================================
- Name        : array.c
+ Name        : polyarray.c
  Author      : Stephen MacKenzie
  Copyright   : Licensed under GPL version 2 (GPLv2)
 ==============================================================================*/
