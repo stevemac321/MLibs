@@ -30,7 +30,7 @@ def flasherase():
 def flashrun():
     binfile = './test.bin'
     elffile = './test.elf'
-    gdbscript = '/mnt/raiddrive/MLibs/gdbscript'  # Path to the gdbscript file
+    gdbscript = os.path.join(os.environ["MLIBS_ROOT"], "gdbscript")
 
     # Flash the binary to the device
     flash1 = subprocess.Popen(['st-flash', 'write', binfile, '0x08000000'])
