@@ -25,12 +25,46 @@ This project is a collection of modular C-based libraries for a variety of algor
 3. **Configure the Environment:**
    The makefiles require a few environment variables to be set. Edit the `env.sh` script to point to your toolchain and the `MLibs` directory. You can also manually add these paths to your environment or set up a Linux distribution toolchain on your path. Check the `stm32.mak` file if you run into any problems.
 
-4. **Build and Flash the Project:**
+  ### 🔐 USB Access for ST-Link/V2.1 (No `sudo` Required)
+
+To use `st-flash` and `openocd` without `sudo`, create a udev rule that gives proper access to your ST-Link device:
+
+```bash
+sudo nano /etc/udev/rules.d/49-stlinkv2.rules
+```
+
+Paste this line for ST-Link/V2 or V2.1:
+
+```
+SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="3748", MODE="0666", GROUP="plugdev"
+```
+
+> This rule applies to ST-Link/V2 and ST-Link/V2.1 devices.  
+> Do **not** use `374b`, which is for the Nucleo board’s ST-Link/V2-1.
+
+Then reload udev and replug your device:
+
+```bash
+sudo udevadm control --reload
+sudo udevadm trigger
+```
+
+Make sure your user is in the `plugdev` group:
+
+```bash
+sudo usermod -aG plugdev $USER
+```
+
+Log out and back in (or reboot) for the group change to take effect.
+
+After this setup, you should be able to run `st-flash` and `bfr.py` without `sudo`. 
+
+5. **Build and Flash the Project:**
    - Run `source ./env.sh` to set up the environment variables.
    - Navigate to the test directory you want to build, for example, `cd tests/asmtest`.
    - Use `make` to build the project manually, or use the provided Python build script (`bfr.py`).
 
-5. **Using `bfr.py` for Automation:**
+6. **Using `bfr.py` for Automation:**
    The `bfr.py` script automates building, cleaning, flashing, and running the project.
    - Syntax: `./bfr <directory> <command>`, e.g., `./bfr tests build flashrun`.
    - Available commands: `clean`, `build`, `flashrun`.
@@ -39,11 +73,11 @@ This project is a collection of modular C-based libraries for a variety of algor
      - Flash the `.bin` file using `st-flash`.
      - Start `openocd` and run the tests using `gdb` in an automated fashion.
 
-6. **Toolchain and GDB Setup:**
+7. **Toolchain and GDB Setup:**
    - The default build uses the `gcc-arm-none-eabi` toolchain (version 13.3 at this time).
    - `openocd` and `gdb-multiarch` are recommended for better results and integration.
 
-7. **Adjusting for Your STM32 Board:**
+8. **Adjusting for Your STM32 Board:**
    The suite currently works out of the box with STM32F401RE and STM32F411RE microcontrollers. For compatibility with other STM32F4 boards, update the `LINKER_SCRIPT` path in the `stm32.mak` file located at the root of the project to match your specific board's linker file.
 
    **Example:**
@@ -52,7 +86,7 @@ This project is a collection of modular C-based libraries for a variety of algor
    ```
    Replace the above path with the correct linker script for your board.
 
-8. **Using the `bfy.py` Script for Advanced Operations:**
+9. **Using the `bfy.py` Script for Advanced Operations:**
    - The `bfy.py` script can be used to automate various stages such as building, flashing, and running tests.
    - Use commands like `./bfy tests clean build flashrun` to perform all operations in sequence, or run each stage individually.
 
